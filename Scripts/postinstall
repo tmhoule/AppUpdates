@@ -1,0 +1,25 @@
+#!/bin/sh
+#todd houle
+#March2016
+
+echo "setting LaunchD perms"
+chown root /Library/LaunchDaemons/edu.mit.ll.updateToolKickerGUI.plist
+chown root /Library/LaunchDaemons/edu.mit.ll.updateToolKickerOverDue.plist
+chown root /Library/LaunchDaemons/edu.mit.ll.updateToolInstaller.plist 
+chmod 644 /Library/LaunchDaemons/edu.mit.ll.updateToolInstaller.plist
+chmod 644 /Library/LaunchDaemons/edu.mit.ll.updateToolKickerGUI.plist
+chmod 644 /Library/LaunchDaemons/edu.mit.ll.updateToolKickerOverDue.plist
+
+echo "loading launchD"
+/bin/launchctl load -w /Library/LaunchDaemons/edu.mit.ll.updateToolInstaller.plist
+/bin/launchctl load -w /Library/LaunchDaemons/edu.mit.ll.updateToolKickerGUI.plist
+/bin/launchctl load -w /Library/LaunchDaemons/edu.mit.ll.updateToolKickerOverDue.plist
+
+
+echo "resetting bitbar"
+bitBarDir=$(defaults read /Library/Preferences/com.matryer.BitBar.plist pluginsDirectory)
+mv /usr/local/bitbar/LL* "$bitBarDir"
+killall BitBar
+open -g bitbar://refreshPlugin?name=LL*
+
+exit 0
