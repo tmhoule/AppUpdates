@@ -11,9 +11,9 @@ ____________________________
 Components:
 ScanForUpdates.sh: This script runs via the Casper management server on each workstation.  It downloads the config file named in parameter 4 from the URL (configServer line 17) and scans the computer for applications listed in that file.  It will then record any applicable update required into its a data file /usr/local/updateTool/updaterInfo.txt.  
 
-DEVApplicationUpdateControl.plist: An example config file.  Xcode is the recommended editor.  This file contains each application to scan for on the local machine.  Acceptable parameters are: Source, InstallPolicy, LatestVersion, DueDate, Path
+DEVApplicationUpdateControl.plist: An example config file.  Xcode is the recommended editor.  This file contains each application to scan for on the local machine.
 	
-An entry is NOT required for Apple or Adobe RUM updates.  The due date will be automatically set to two days after the update is first seen by the computer.  If you'd like the update required sooner, enter the exact name of the Apple update and use a Source of Apple and DueDate.  
+	An entry is NOT required for Apple or Adobe RUM updates.  The due date will be automatically set to two days after the update is first seen by the computer.  If you'd like the update required sooner, enter the exact name of the Apple update and use a Source of Apple and DueDate.  
 	
 build.sh: basic shell script to create an installer package to distribute to clients.  
 
