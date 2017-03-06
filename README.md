@@ -1,6 +1,7 @@
 # llupdatetool
 # Todd Houle
-# MIT LL
+
+NOTE: Yes, I know it's a mess here.  Just uploaded repo and need to make pretty. I'm working on it...
 
 ___________________________
 About:
