@@ -1,5 +1,4 @@
-###NOTE: Yes, I know it's a mess here.  Just uploaded repo and need to make pretty. I'm working on it...
-
+###NOTE: View the quickstart guide for a quick tutorial.  
 ___________________________
 ###About:
 This suite of tools allows a Jamf JSS to manage application updates on workstations in your environment.  It can do version comparisons and force updates after a set period of time.
