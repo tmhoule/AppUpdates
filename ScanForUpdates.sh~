@@ -14,7 +14,7 @@
 ################################
 
 #Server and path to get config file from. 
-configServer="$4"
+configServer="http://serverName.mit.edu/UpdateToolConfigs/"
 
 
 #################################
@@ -218,9 +218,9 @@ rm  /usr/local/updateTool/unpatchedAppList.txt
 touch  /usr/local/updateTool/unpatchedAppList.txt
 
 #get config file containing updates from server
-logger "LLUpdate: Getting config $configServer$5"
-if [ ! -z $5 ]; then
-	curl -so /tmp/ApplicationUpdateControl.plist $configServer/$5
+logger "LLUpdate: Getting config $configServer$4"
+if [ ! -z $4 ]; then
+	curl -so /tmp/ApplicationUpdateControl.plist $configServer/$4
 	if [ ! -f /tmp/ApplicationUpdateControl.plist ]; then
 		echo "No config file available.  Exiting."
 		exit 1
