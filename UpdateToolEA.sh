@@ -11,7 +11,7 @@
 # use "/sbin/md5 /path/to/script" to determine appropriate MD5 code.                                                                                                                                                                             
 ###                                                                                                                                                                                                                                              
 
-updateInstaller=34394d638b492cf06a6153194e119619
+updateInstaller=d2d6c5f588db4bdb177379d01aef31fc
 updateKicker_popup=226a22d65c14e1171f5094689a7b525e
 updateKicker_overdue=134c795c9659467a39df7b1a45d2feca
 
