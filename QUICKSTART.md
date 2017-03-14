@@ -5,7 +5,7 @@ QuickStart Guide - to deploy the Mac Update tool quickly.
 2) Create a policy to run the script.  
 	In parameter 4, set it to the path to a webserver where you'll put the config file (ie: http://mycompany.com/configFiles). Your client computers will download a file on this server to know what updates are appropriate for them.  
 	In parameter 5, enter the file that contains the updates.  In this tutorial, it is called DEVApplicationUpdateControl.plist
-	The Custom policy needs to be updateapps4.  Also set the execution frequency to run once per hour.
+	The Custom policy needs to be updateapps4.  Also set the execution frequency to on check in to run once per hour.
 
 3) Create a policy in your JSS for each applicaiton you want to update.  Firefox for example, create a policy to install firefox, scoped to all computers.  The trigger should be a custom trigger with a name such as 'firefox54'.  If you want, you may publish to Self Service but do not have any other triggers on it.  Set it be available 'ongoing'.
 
