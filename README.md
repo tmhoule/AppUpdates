@@ -3,6 +3,7 @@ ___________________________
 ###About:
 This suite of tools allows a Jamf JSS to manage application updates on workstations in your environment.  It can do version comparisons and force updates after a set period of time.
 
+![alt tag](https://github.com/tmhoule/AppUpdates/raw/master/ReadMeImages/AppGUIimage.png)
 
 ____________________________
 ###Components:
