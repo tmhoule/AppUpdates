@@ -31,7 +31,7 @@ notify(){
 	    open -g bitbar://refreshPlugin?name=*
 	fi
     else
-	/Library/Application\ Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper -windowType utility -title ISD_Updates -description "$message" -windowPosition ll -icon /usr/local/Logos/logo.png&
+	/Library/Application\ Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper -windowType utility -title App_Updates -description "$message" -windowPosition ll -icon /usr/local/Logos/logo.png&
     fi
     logger "LLUpdate: $message"
 }
