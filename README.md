@@ -16,7 +16,7 @@ An entry is NOT required for Apple or Adobe RUM updates.  The due date will be a
 **build.sh**: basic shell script to create an installer package to distribute to clients. Or use the PKG in the repo, no customization needed.  Below is what is included in the client package.
 
  llupdatetool: main directory of source code.
-* Applications: Utilities: LL App Update Tool.app -  This is the GUI application for end users to list applicable updates on their computer.  They can install updates and force a refresh of required updates.
+* Applications: Utilities: App Update Tool.app -  This is the GUI application for end users to list applicable updates on their computer.  They can install updates and force a refresh of required updates.
 * Library: LaunchAgents: edu.mit.BitBarLaunch.plist - A launchAgent to open BitBar on login.  
 * Library: LaunchDaemons: edu.mit.updateToolKickerGUI.plist - A launchDaemon run the script to open the GUI program for the user when an update is detected and is NOT overdue.
 * Library: LaunchDaemons: edu.mit.updateToolKickerOverDue.plist - A launchDaemon to run the script to scan for overdue updates and force an install if one is detected.
@@ -34,7 +34,7 @@ Scripts: postinstall - this script is used by build.sh to set the correct permis
 
 UpdateToolEA.sh - An extension attribute for Casper that shows if any of the updateTool files have been tampered with by comparing the MD5 value.  
 
-LL App Update Tool - the source code for the GUI tool is in a different repository.  AppUpdatesGUI
+App Update Tool - the source code for the GUI tool is in a different repository.  AppUpdatesGUI
 
 _______________________________________________________
 ###BitBar:
