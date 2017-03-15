@@ -12,3 +12,6 @@ Additional information is available in the Wiki
 
 #### Three components
 There are three diffrent parts to this utility.  A suite of client bash scripts with a GUI tool to view updates, a script that runs on your JSS via a policy, and a configuration file on a webserver.  
+
+#### How does it work?
+The script called ScanForUpdates.sh will download the config file and compare applications listed in there to applications installed on the computer.  For each application, it'll check the version number and compare it to the version number in your config file.  If it's an older version on the computer, a note is made that it needs an update by the due date in the config file.  If the due date passes, then the user is given a countdown and the update is applied at the end.  
