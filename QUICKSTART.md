@@ -15,7 +15,7 @@ QuickStart Guide - to deploy the App Update tool quickly.
 
 6) Copy the file DEVApplicationUpdateControl.plist to the web server you specified in step 2.  You may need to edit your webserver MIME types to support the file extension of .plist.
 
-7) Install the UpdateTool.pkg to your client machine.  
+7) Install the UpdateTool.pkg to your client machine.  (https://github.com/tmhoule/AppUpdates/raw/master/UpdateTool.pkg)
 
 8) When the ScanForUpdates policy/script runs, the computer will record all updates needed by the computer.  It'll go through managed apps, such as Firefox deployed above.  It'll also look at AppleSoftwareUpdate for Apple updates and RemoteUpdateManager for Adobe Creative Cloud updates.  
 
