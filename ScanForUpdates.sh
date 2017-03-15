@@ -1,5 +1,4 @@
 #!/bin/sh
-# LL Software Update Tool
 # Todd Houle
 # Dec 2015
 # writes updates needed to $datafile
@@ -10,17 +9,8 @@
 #(ie: ./JssPolicy.sh x y z http://mycompany.com/configs config.plist)
 #If run via JSS Policy, this should be first and second parameter box when running the script via Policy
 
-################################
-#Configuration
-################################
-
-#Server and path to get config file from. 
+#Server to get config file from. 
 configServer="$4"
-
-
-#################################
-#Dont Edit Below
-#################################
 
 datafile="/usr/local/updateTool/updaterInfoTEMP.txt"
 
