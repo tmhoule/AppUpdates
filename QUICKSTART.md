@@ -16,6 +16,8 @@ QuickStart Guide - to deploy the App Update tool quickly.
 
 4) Create a policy in your JSS for each applicaiton you want to update.  Firefox for example, create a policy to install firefox, scoped to all computers.  The trigger should be a custom trigger with a name such as 'firefox54'.  If you want, you may publish to Self Service but do not have any other triggers on it.  Set it be available 'ongoing'.
 
+	![alt tag](https://github.com/tmhoule/AppUpdates/raw/master/ReadMeImages/FirefoxPolicy.png)
+
 5) Edit the file DEVApplicationUpdateControl.plist to list applications which need updates.  XCode is best for this task.  Delete the other lines in that file except for Firefox.  Set the InstallPolicy to be the name of the policy from step 2 (ie: firefox54).  Set the DueDate to a day or two after today.  Set the LatestVersion in the file to match the version of Firefox you are deploying.
 
 	![alt tag](https://github.com/tmhoule/AppUpdates/raw/master/ReadMeImages/DEVControlplist.png)
