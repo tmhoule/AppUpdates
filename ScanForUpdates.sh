@@ -64,7 +64,7 @@ update(){
     unpatchedApps=$(/usr/bin/mdfind "kind:application" $appName)
 #    unpatchedApps=$(/usr/bin/mdfind "kMDItemDisplayName=='$appName'&&kMDItemContentType=='com.apple.application-bundle'")
     while read -r line; do
-	echo "DEBUG: line is $line"
+#	echo "DEBUG: line is $line"
 	if [ ! -z "$line" ]; then   #if line is not blank (app not installed)
 	    if [ ! "$appPath" == "$line" ]; then   
 		thisAppVersion=$(defaults read "$line/Contents/Info.plist" CFBundleShortVersionString)
