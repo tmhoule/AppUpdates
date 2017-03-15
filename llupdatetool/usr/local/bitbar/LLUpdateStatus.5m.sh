@@ -47,3 +47,10 @@ elif [ -s /usr/local/updateTool/updaterInfo.txt ]; then
 else
     echo "No Application Updates Available| image=$icon bash=/usr/local/updateTool/openPopUP.sh terminal=false"
 fi
+
+##### Unpatched Apps
+
+#if [ -f /usr/local/updateTool/unpatchedAppList.txt ]; then
+#    echo "Unpatched Applications"
+#    cat /usr/local/updateTool/unpatchedAppList.txt
+#fi

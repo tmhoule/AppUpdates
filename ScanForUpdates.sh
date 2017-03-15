@@ -6,8 +6,9 @@
 # That file is read in with the GUI tool
 
 
-#File name of config should be supplied as fourth parameter (ie: ./JssPolicy.sh x y z config.plist)
-#If run via JSS Policy, this should be first parameter box when running the script via Policy
+#File name of server with the config file should be supplied as fourth parameter and the name of the config file as the fifth
+#(ie: ./JssPolicy.sh x y z http://mycompany.com/configs config.plist)
+#If run via JSS Policy, this should be first and second parameter box when running the script via Policy
 
 ################################
 #Configuration
@@ -67,11 +68,11 @@ update(){
     if [ -z "$appBundleName" ]; then
 	appBundleName="NotInstalled"
     fi
-    echo "DEBUG: Begin $appName"
+#    echo "DEBUG: Begin $appName"
     
     #build list of versions of app which will not be patched (appPath doesn't match defined path)
-#    unpatchedApps=$(/usr/bin/mdfind "kind:application" $appName)
-    unpatchedApps=$(/usr/bin/mdfind "kMDItemDisplayName=='$appName'&&kMDItemContentType=='com.apple.application-bundle'")
+    unpatchedApps=$(/usr/bin/mdfind "kind:application" $appName)
+#    unpatchedApps=$(/usr/bin/mdfind "kMDItemDisplayName=='$appName'&&kMDItemContentType=='com.apple.application-bundle'")
     while read -r line; do
 	echo "DEBUG: line is $line"
 	if [ ! -z "$line" ]; then   #if line is not blank (app not installed)
