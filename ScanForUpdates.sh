@@ -77,6 +77,7 @@ update(){
 	echo "DEBUG: line is $line"
 	if [ ! -z "$line" ]; then   #if line is not blank (app not installed)
 	    if [ ! "$appPath" == "$line" ]; then   
+		thisAppVersion=$(defaults read "$line/Contents/Info.plist" CFBundleShortVersionString)
 		echo "--$appName - $line - version: $thisAppVersion (latest:$latestVersion)|color=black" >> /usr/local/updateTool/unpatchedAppList.txt
    	    fi
 	fi
