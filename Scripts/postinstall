@@ -3,18 +3,17 @@
 #March2016
 
 echo "setting LaunchD perms"
-chown root /Library/LaunchDaemons/edu.mit.ll.updateToolKickerGUI.plist
-chown root /Library/LaunchDaemons/edu.mit.ll.updateToolKickerOverDue.plist
-chown root /Library/LaunchDaemons/edu.mit.ll.updateToolInstaller.plist 
-chmod 644 /Library/LaunchDaemons/edu.mit.ll.updateToolInstaller.plist
-chmod 644 /Library/LaunchDaemons/edu.mit.ll.updateToolKickerGUI.plist
-chmod 644 /Library/LaunchDaemons/edu.mit.ll.updateToolKickerOverDue.plist
+chown root /Library/LaunchDaemons/edu.mit.updateToolKickerGUI.plist
+chown root /Library/LaunchDaemons/edu.mit.updateToolKickerOverDue.plist
+chown root /Library/LaunchDaemons/edu.mit.updateToolInstaller.plist 
+chmod 644 /Library/LaunchDaemons/edu.mit.updateToolInstaller.plist
+chmod 644 /Library/LaunchDaemons/edu.mit.updateToolKickerGUI.plist
+chmod 644 /Library/LaunchDaemons/edu.mit.updateToolKickerOverDue.plist
 
 echo "loading launchD"
-/bin/launchctl load -w /Library/LaunchDaemons/edu.mit.ll.updateToolInstaller.plist
-/bin/launchctl load -w /Library/LaunchDaemons/edu.mit.ll.updateToolKickerGUI.plist
-/bin/launchctl load -w /Library/LaunchDaemons/edu.mit.ll.updateToolKickerOverDue.plist
-
+/bin/launchctl load -w /Library/LaunchDaemons/edu.mit.updateToolInstaller.plist
+/bin/launchctl load -w /Library/LaunchDaemons/edu.mit.updateToolKickerGUI.plist
+/bin/launchctl load -w /Library/LaunchDaemons/edu.mit.updateToolKickerOverDue.plist
 
 echo "resetting bitbar"
 bitBarDir=$(defaults read /Library/Preferences/com.matryer.BitBar.plist pluginsDirectory)
