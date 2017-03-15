@@ -1,4 +1,4 @@
-QuickStart Guide - to deploy the Mac Update tool quickly.  
+QuickStart Guide - to deploy the App Update tool quickly.  
 
 1) Click on the gear on the top right of your JSS and select Scripts.  Create a new script in your JSS  - call it Scan For Updates.   Copy the contents of the ScanForUpdates.sh script into the JSS Script.  
 
@@ -13,7 +13,7 @@ QuickStart Guide - to deploy the Mac Update tool quickly.
 
 5) Copy the file DEVApplicationUpdateControl.plist to the web server you specified in step 2.  You may need to edit your webserver MIME types to support the file extension of .plist.
 
-6) Install the LLUpdateTool.pkg to your client machine.  
+6) Install the UpdateTool.pkg to your client machine.  
 
 7) When the ScanForUpdates policy/script runs, the computer will record all updates needed by the computer.  It'll go through managed apps, such as Firefox deployed above.  It'll also look at AppleSoftwareUpdate for Apple updates and RemoteUpdateManager for Adobe Creative Cloud updates.  
 
