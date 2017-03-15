@@ -5,9 +5,9 @@ QuickStart Guide - to deploy the App Update tool quickly.
 2) Create a policy to run the script.  
 	In parameter 4, set it to the path to a webserver where you'll put the config file (ie: http://mycompany.com/configFiles). Your client computers will download a file on this server to know what updates are appropriate for them.  
 	In parameter 5, enter the file name that contains the updates.  In this tutorial, it is called DEVApplicationUpdateControl.plist
-	The Custom policy needs to be updateapps4.  Set it to run Ongoing with no other triggers
+	The Custom policy needs to be 'updateapps4'.  Set it to run Ongoing with no other triggers and scoped to all computers.
 	
-3) Duplicate the policy from above.  Remote the custom trigger and add a 'Check-in' trigger.  Set the frequency to every hour or every day.  This policy ensures machines are scanned for updates occasionally.  The above policy in step 2 is used to refresh updates when called by the client. 
+3) Duplicate the policy from above.  Remove the custom trigger and add a 'Check-in' trigger.  Set the frequency to every hour or every day.  This policy ensures machines are scanned for updates occasionally.  The above policy in step 2 is used to refresh updates when called by the client. 
 
 4) Create a policy in your JSS for each applicaiton you want to update.  Firefox for example, create a policy to install firefox, scoped to all computers.  The trigger should be a custom trigger with a name such as 'firefox54'.  If you want, you may publish to Self Service but do not have any other triggers on it.  Set it be available 'ongoing'.
 
