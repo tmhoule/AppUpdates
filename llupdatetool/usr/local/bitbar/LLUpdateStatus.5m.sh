@@ -50,7 +50,7 @@ fi
 
 ##### Unpatched Apps
 
-#if [ -f /usr/local/updateTool/unpatchedAppList.txt ]; then
-#    echo "Unpatched Applications"
-#    cat /usr/local/updateTool/unpatchedAppList.txt
-#fi
+if [ -f /usr/local/updateTool/unpatchedAppList.txt ]; then
+    echo ":exclamation: Unpatched Applications"
+    cat /usr/local/updateTool/unpatchedAppList.txt
+fi
