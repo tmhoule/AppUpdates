@@ -80,6 +80,7 @@ checkFileForUpdates(){
     fi
 }
 
+
 installUpdates(){
     defaults delete /Library/Preferences/edu.mit.isd.plist LLupdateSnoozeCount
     for ((i = 0; i < ${#OVERDUEUPDATESPOLICY[@]}; i++)); do
@@ -87,6 +88,10 @@ installUpdates(){
         policyName=`echo "$helperLine" | awk -FjssPolicy:\" '{print $2}' |awk -F\" '{print $1}'`
         source=`echo "$helperLine" | awk -Fsource:\" '{print $2}' |awk -F\" '{print $1}'`
         reboot=`echo "$helperLine" | awk -Freboot: '{print $2}' |tr -d }`
+#     only kills process when update is overdue.  Need solution for non-overdue updates
+#	appName=`echo "$helperLine" | awk -FappName:\" '{print $2}' |awk -F\" '{print $1}'`
+#	appProcess=$(ps axww -o pid,command|grep -v grep |grep -v bash|grep "$appName"|awk '{print $1}')
+#	/bin/kill $appProcess
 	if [ "$reboot" == "false" ]; then
 	    rebootAction="rebootNo"
 	else
