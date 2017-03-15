@@ -9,3 +9,6 @@ This suite of tools allows a Jamf JSS to manage application updates on workstati
 Updates come from your JAMF JSS, Apple Software Update, and Adobe's Remote Update Manager.  While the later two are automatic, you provide updates and due dates for internal applications.  Simply create a policy for an application with a custom trigger and add an entry to the AppUpdates configration file. If the applicaiton is installed on a machine and it has an older version, the udpate will be offered until the due date.  After the due date, the user will get a warning/countdown and the application will be automatically updated.  
 
 Additional information is available in the Wiki
+
+#### Three components
+There are three diffrent parts to this utility.  A suite of client bash scripts with a GUI tool to view updates, a script that runs on your JSS via a policy, and a configuration file on a webserver.  
