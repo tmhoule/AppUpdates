@@ -132,7 +132,7 @@ fi
 
 #jamfHelperShortcut
 JH="/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper"
-JHaddon=" -windowType utility -title ISD_Updates -icon /usr/local/Logos/logo.png "
+JHaddon=" -windowType utility -title App_Updates -icon /usr/local/Logos/logo.png "
 
 #cancel if installRunning
 SERVICE='updateInstaller.sh'                                                                                          
