@@ -32,7 +32,7 @@ QuickStart Guide - to deploy the App Update tool quickly.
 
 	![alt tag](https://github.com/tmhoule/AppUpdates/raw/master/ReadMeImages/AppGUIimage.png)
 	
-Overdue updates will show on the machine like this:
+Overdue updates will show on the machine like this
 
 	![alt tag](https://github.com/tmhoule/AppUpdates/raw/master/ReadMeImages/overdueUpdate.png)
 
