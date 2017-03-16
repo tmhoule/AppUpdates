@@ -31,5 +31,9 @@ QuickStart Guide - to deploy the App Update tool quickly.
 9) To see what updates are needed by a computer, open /Applications/Utilities/App Update Tool.   That'll list what the computer needs along with the due date.  You can check the boxes to install the wanted updates there.
 
 	![alt tag](https://github.com/tmhoule/AppUpdates/raw/master/ReadMeImages/AppGUIimage.png)
+	
+Overdue updates will show on the machine like this:
+
+	![alt tag](https://github.com/tmhoule/AppUpdates/raw/master/ReadMeImages/overdueUpdate.png)
 
 To deploy more updates, you can create another policy besides Firefox (and edit the DEVApplicationUpdateControl.plst to list it).  You can also create different files - a ProductionApplicationUpdateControl.plist that runs on your production machines, while the DEV one runs only on your test machines!  More info to come in the Wiki/ReadMe
