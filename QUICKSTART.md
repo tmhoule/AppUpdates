@@ -43,4 +43,9 @@ Let's Go!
 
 	![alt tag](https://github.com/tmhoule/AppUpdates/raw/master/ReadMeImages/overdueUpdate.png)
 
+11) If you [have BitBar installed](https://github.com/tmhoule/AppUpdates/wiki/BitBar-Integration), then updates will also show in the menu bar.
+
+        ![alt tag](https://github.com/tmhoule/AppUpdates/raw/master/ReadMeImages/MenuBar.png)
+
 To deploy more updates, you can create another policy besides Firefox (and edit the DEVApplicationUpdateControl.plst to list it).  You can also create different files - a ProductionApplicationUpdateControl.plist that runs on your production machines, while the DEV one runs only on your test machines!  More info to come in the Wiki/ReadMe
+
