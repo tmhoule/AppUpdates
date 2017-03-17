@@ -1,5 +1,12 @@
 QuickStart Guide - to deploy the App Update tool quickly.  
 
+You will need the following:
+1) Access to a JAMF JSS server
+2) Access to a web server where you can post a file
+3) A client computer to update
+4) An installer for a program you want to update (ie: Firefox)
+
+Let's Go!
 1) Click on the gear on the top right of your JSS and select Scripts.  Create a new script in your JSS  - call it Scan For Updates.   Copy the contents of the ScanForUpdates.sh script into the JSS Script.  
 
 2) Create a policy to run the script.  
