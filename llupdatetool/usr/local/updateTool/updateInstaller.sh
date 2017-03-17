@@ -17,7 +17,7 @@ bitBarPath=$(defaults read /Library/Preferences/com.matryer.BitBar.plist plugins
 notify(){
     message=$1
 
-    if [ -f /Applications/Utilities/BitBar.app/Contents/MacOS/BitBar ] && [ -f $bitBarPath/LLAppStatus.20m.sh ]; then
+    if [ -f /Applications/Utilities/BitBar.app/Contents/MacOS/BitBar ] && [ -f $bitBarPath/LLAppStatus.5m.sh ]; then
         echo "$message |image=$icon2 dropdown=false size=11" > /tmp/installStatus.txt
 	echo "Updates in Progress... |image=$icon dropdown=false size=11" >> /tmp/installStatus.txt
 	echo "---" >> /tmp/installStatus.txt
