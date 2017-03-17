@@ -82,7 +82,7 @@ checkFileForUpdates(){
 
 
 installUpdates(){
-    defaults delete /Library/Preferences/edu.mit.isd.plist LLupdateSnoozeCount
+    defaults delete /Library/Preferences/edu.mit.updateTool.plist updateSnoozeCount
     for ((i = 0; i < ${#OVERDUEUPDATESPOLICY[@]}; i++)); do
         helperLine=`grep "${OVERDUEUPDATESPOLICY[$i]}" /usr/local/updateTool/updaterInfo.txt`
         policyName=`echo "$helperLine" | awk -FjssPolicy:\" '{print $2}' |awk -F\" '{print $1}'`
@@ -124,7 +124,7 @@ fi
 
 
 #get snooze counter
-snoozeCount=`defaults read /Library/Preferences/edu.mit.isd.plist LLupdateSnoozeCount`
+snoozeCount=`defaults read /Library/Preferences/edu.mit.updateTool.plist updateSnoozeCount`
 if [ -z $snoozeCount ]; then
     snoozeCount=5
     defaults write /Library/Preferences/edu.mit.isd.plist LLupdateSnoozeCount -int 5

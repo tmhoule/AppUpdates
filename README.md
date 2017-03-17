@@ -2,7 +2,7 @@
 ##### (https://github.com/tmhoule/AppUpdates/blob/master/QUICKSTART.md)
 ___________________________
 ### About:
-This suite of tools allows a Jamf JSS to manage application updates on workstations in your environment.  It can do version comparisons and force updates after a set period of time.
+This suite of tools allows a Jamf JSS to manage application updates on workstations in your environment.  It can do version comparisons and force updates after a set period of time. It is easy to setup and integrates nicely with your JAMF JSS. 
 
 ![alt tag](https://github.com/tmhoule/AppUpdates/raw/master/ReadMeImages/AppGUIimage.png)
 
