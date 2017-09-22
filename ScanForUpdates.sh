@@ -50,7 +50,7 @@ update(){
     # Rename function arguments for easier reference 
     appName="$1" # Application Friendly Name
     latestVersion="$2" #The latest version of the app on the server
-    installPolicy="$3"   #The name of the JSS policy to run to install the cached package
+    packageName="$3"   #The name of the JSS policy to run to install the cached package
     installBy="$4"  #The date the update will be autoinstalled if not done yet.
     minVers="$5" #Versions below this will be ignored 
     appPath="$6" #path to the app, as defined in the config file
@@ -107,7 +107,7 @@ update(){
     if [ $newerApp == 1 ]; then
 	     # An update is available. Record it for the GUI
 	logger "LLUpdate: update for $appName is available"
-	echo "{source:\"JSS\",appName:\"$appName\",appVersion:\"$latestVersion\",jssPolicy:\"$installPolicy\",dueDate:\"$installBy\",appInstallChk:true,reboot:false}" >> $datafile
+	echo "{source:\"JSS\",appName:\"$appName\",appVersion:\"$latestVersion\",jssPolicy:\"$packageName\",dueDate:\"$installBy\",appInstallChk:true,reboot:false}" >> $datafile
     elif [ $newerApp == 2 ]; then
 	logger "LLUpdate: User has a newer version of $appName than on the server. Do Nothing"
     elif [ $newerApp == 0 ]; then
@@ -237,12 +237,11 @@ while read -r line; do
     dueDateApple=$(defaults read /tmp/ApplicationUpdateControl.plist "$line"|awk -F= '/DueDate/{print $2}'|sed 's/;//'|sed 's/"//g'| sed -e 's/^[[:space:]]*//')
     dueDate=$(date -j -f "%Y-%m-%d %H:%M:%S %z" "$dueDateApple" +"%m-%d-%Y %H:%M")
     appPath=$(defaults read /tmp/ApplicationUpdateControl.plist "$line"|awk -F= '/Path/{print $2}' | sed 's/"//g'|sed 's/;//'|sed -e 's/^[[:space:]]*//')
-    installPolicy=$(defaults read /tmp/ApplicationUpdateControl.plist "$line"|awk '/InstallPolicy/{print $3}' | sed 's/;//')
+    packageName=$(defaults read /tmp/ApplicationUpdateControl.plist "$line"|awk '/PackageName/{print $3}' | sed 's/;//')
     source=$(defaults read /tmp/ApplicationUpdateControl.plist "$line"|awk '/Source/{print $3}'|sed 's/;//')
     latestVer=$(defaults read /tmp/ApplicationUpdateControl.plist "$line"|awk '/LatestVersion/{print $3}'|sed 's/;//'|sed 's/"//g')
     minVers=$(defaults read /tmp/ApplicationUpdateControl.plist  "$line"|awk '/MinimumVersion/{print $3}'|sed 's/;//'|sed 's/"//g')
     if [[ "$source" == http* ]]; then
-#		echo "Executing JSS update on: \"$line\" \"$latestVer\" \"$installPolicy\" \"$dueDate\" \"$minVers\" \"$appPath\"  "
 		update "$line" "$latestVer" "$installPolicy" "$dueDate" "$minVers" "$appPath" "$source"
     fi
 done <<< "$policiesToCheck"
