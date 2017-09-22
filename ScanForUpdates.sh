@@ -150,7 +150,7 @@ checkAppleUpdates(){
 		    installBy="$nextWeek 23:30"
 		fi	
 		rebootNeeded=`echo "$updateList" |grep -A1 "$jssPolicy"|tail -1|grep restart`
-		existsAlready=`cat /usr/local/updateTool/updaterInfo-holder.txt |grep "$jssPolicy"`
+		existsAlready=`cat /usr/local/updateTool/updaterInfo-holderPreCache.txt |grep "$jssPolicy"`
 		if [[ -z $rebootNeeded ]]; then
 		    rebootStatus=false
 		else
@@ -189,7 +189,7 @@ checkforAdobeUpdates(){
         updatesArray=( $updates )
         for eachUpdate in ${updatesArray[@]}; do
             updateClean=`echo $eachUpdate |awk -F/ '{print $1}'|tr -d \(`
-            adobeExistsAlready=`cat /usr/local/updateTool/updaterInfo-holder.txt |grep $updateClean`
+            adobeExistsAlready=`cat /usr/local/updateTool/updaterInfo-holderPreCache.txt |grep $updateClean`
             if [[ -z $adobeExistsAlready ]]; then
                 echo "{source:\"Adobe\",appName:\"$updateClean\",appVersion:\"...\",jssPolicy:\"$updateClean\",dueDate:\"$installBy\",appInstallChk:true,reboot:false}" >> $datafile
             else
@@ -241,9 +241,9 @@ while read -r line; do
     source=$(defaults read /tmp/ApplicationUpdateControl.plist "$line"|awk '/Source/{print $3}'|sed 's/;//')
     latestVer=$(defaults read /tmp/ApplicationUpdateControl.plist "$line"|awk '/LatestVersion/{print $3}'|sed 's/;//'|sed 's/"//g')
     minVers=$(defaults read /tmp/ApplicationUpdateControl.plist  "$line"|awk '/MinimumVersion/{print $3}'|sed 's/;//'|sed 's/"//g')
-    if [ "$source" == "JSS" ]; then
+    if [[ "$source" == http* ]]; then
 #		echo "Executing JSS update on: \"$line\" \"$latestVer\" \"$installPolicy\" \"$dueDate\" \"$minVers\" \"$appPath\"  "
-		update "$line" "$latestVer" "$installPolicy" "$dueDate" "$minVers" "$appPath"
+		update "$line" "$latestVer" "$installPolicy" "$dueDate" "$minVers" "$appPath" "$source"
     fi
 done <<< "$policiesToCheck"
 
@@ -261,8 +261,8 @@ else
 fi
 
 #backup the File
-cat $datafile |uniq > /usr/local/updateTool/updaterInfo.txt
-cp $datafile /usr/local/updateTool/updaterInfo-holder.txt
+cat $datafile |uniq > /usr/local/updateTool/updaterInfoPreCache.txt
+cp $datafile /usr/local/updateTool/updaterInfo-holderPreCache.txt
 
 echo "Current updaterInfo.txt file"
 cat $datafile
