@@ -6,7 +6,7 @@
 
 
 #File name of server with the config file should be supplied as fourth parameter and the name of the config file as the fifth
-#(ie: ./JssPolicy.sh x y z http://mycompany.com/configs config.plist)
+#(ie: ./ScanForUpdates.sh x y z http://mycompany.com/configs config.plist)
 #If run via JSS Policy, this should be first and second parameter box when running the script via Policy
 
 #Server to get config file from. 
@@ -75,7 +75,7 @@ update(){
     
     #skip if not installed
     if [ ! -d "$appPath" ]; then
-	logger "LLUpdate: $appName is not installed. Couldn't find $appPath"
+	echo "LLUpdate: $appName is not installed. Couldn't find $appPath"
 	return
     fi
     
@@ -87,16 +87,16 @@ update(){
 	vercomp $minVers $latestVersion
 	minOK=$?
 	if [ $minOK == 1 ]; then
-	    logger "LLUpdate: $appName does not meet minimum version requirement. Skipping"
+	    echo "LLUpdate: $appName does not meet minimum version requirement. Skipping"
 	    return
 	else
-	    logger "LLUpdate: $appName passes minimum version requirement."
+	    echo "LLUpdate: $appName passes minimum version requirement."
 	fi
     fi
     
          #find out which is newer, server (listed below) or what is on client machine.
     if [[ $installedVersion =~ [A-z] ]] || [[ $installedVersion = "" ]]; then
-	logger "LLUpdate: ERROR - $appName version contains unsupported text: $versionString"
+	echo "LLUpdate: ERROR - $appName version contains unsupported text: $versionString"
 	return
     else
 	vercomp $latestVersion $installedVersion
@@ -106,14 +106,14 @@ update(){
     # If newer version is available, do this stuff.
     if [ $newerApp == 1 ]; then
 	     # An update is available. Record it for the GUI
-	logger "LLUpdate: update for $appName is available"
-	echo "{source:\"JSS\",appName:\"$appName\",appVersion:\"$latestVersion\",jssPolicy:\"$packageName\",dueDate:\"$installBy\",appInstallChk:true,reboot:false}" >> $datafile
+	echo "LLUpdate: update for $appName is available"
+	echo "{source:$source,appName:\"$appName\",appVersion:\"$latestVersion\",jssPolicy:\"$packageName\",dueDate:\"$installBy\",appInstallChk:true,reboot:false}" >> $datafile
     elif [ $newerApp == 2 ]; then
-	logger "LLUpdate: User has a newer version of $appName than on the server. Do Nothing"
+	echo "LLUpdate: User has a newer version of $appName than on the server. Do Nothing"
     elif [ $newerApp == 0 ]; then
-	logger "LLUpdate: User has same version of $appName as is installed.  Do Nothing."
+	echo "LLUpdate: User has same version of $appName as is installed.  Do Nothing."
     else
-	logger "LLUpdate: ERROR: Unknown Error occured comparing version on $appName.  You have $installedVersion and the latest is $latestVersion."
+	echo "LLUpdate: ERROR: Unknown Error occured comparing version on $appName.  You have $installedVersion and the latest is $latestVersion."
     fi
     
     unset appPath
@@ -141,9 +141,9 @@ checkAppleUpdates(){
 		appNameWithWhiteSpace=`echo "$updateList" |grep -A1 "$jssPolicy"|tail -1|awk -F\( '{print $1}'`
 		appName="$(echo "${appNameWithWhiteSpace}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
 		latestVersion=`echo "$updateList" |grep -A1 "$jssPolicy"|tail -1|awk -F\( '{print $2}'|awk -F\) '{print $1}'`
-		fixedPolicy=$(defaults read /tmp/ApplicationUpdateControl.plist |awk -F= '/{/{print $1}'|grep "$jssPolicy")
+		fixedPolicy=$(defaults read /usr/local/updateTool/ApplicationUpdateControl.plist |awk -F= '/{/{print $1}'|grep "$jssPolicy")
 		if [ ! -z "$fixedPolicy" ]; then
-		    dueDateApple=$(defaults read /tmp/ApplicationUpdateControl.plist "$jssPolicy"|awk -F= '/DueDate/{print $2}'|sed 's/;//'|sed 's/"//g'| sed -e 's/^[[:space:]]*//')
+		    dueDateApple=$(defaults read /usr/local/updateTool/ApplicationUpdateControl.plist "$jssPolicy"|awk -F= '/DueDate/{print $2}'|sed 's/;//'|sed 's/"//g'| sed -e 's/^[[:space:]]*//')
 		    dueDateSwapped=`echo "$dueDateApple" | sed 's/+0000/GMT/'`
 		    installBy=$(date -j -f "%Y-%m-%d %H:%M:%S %Z" "$dueDateSwapped" +"%m-%d-%Y %H:%M")
 		else
@@ -171,9 +171,9 @@ checkAppleUpdates(){
 
 checkforAdobeUpdates(){
     nextWeek=`date -v +1d +%m-%d-%Y`
-    installBy=$(defaults read /tmp/ApplicationUpdateControl.plist $jssPolicy)
+    installBy=$(defaults read /usr/local/updateTool/ApplicationUpdateControl.plist $jssPolicy)
     if [ -z "$installBy" ]; then
-        dueDateApple=$(defaults read /tmp/ApplicationUpdateControl.plist "$line"|awk -F= '/DueDate/{print $2}'|sed 's/;//'|sed 's/"//g'| sed -e 's/^[[:space:]]*//')
+        dueDateApple=$(defaults read /usr/local/updateTool/ApplicationUpdateControl.plist "$line"|awk -F= '/DueDate/{print $2}'|sed 's/;//'|sed 's/"//g'| sed -e 's/^[[:space:]]*//')
         dueDateSwapped=`echo "$dueDateApple" | sed 's/+0000/GMT/'`
         installBy=$(date -j -f "%Y-%m-%d %H:%M:%S %Z" "$dueDateSwapped" +"%m-%d-%Y %H:%M")
     else
@@ -183,7 +183,7 @@ checkforAdobeUpdates(){
     coolRUM=`$RUM --help 2>&1 |grep action`
     
     if [[ -z $coolRUM ]];then
-	logger "LLUpdate: Old version of RUM"
+	echo "LLUpdate: Old version of RUM"
     else
         updates=`$RUM --action=list |grep /`
         updatesArray=( $updates )
@@ -210,15 +210,16 @@ rm  /usr/local/updateTool/unpatchedAppList.txt
 touch  /usr/local/updateTool/unpatchedAppList.txt
 
 #get config file containing updates from server
-logger "LLUpdate: Getting config $configServer$5"
+echo "LLUpdate: Getting config $configServer$5"
 if [ ! -z $5 ]; then
-	curl -so /tmp/ApplicationUpdateControl.plist $configServer/$5
-	if [ ! -f /tmp/ApplicationUpdateControl.plist ]; then
+    echo "Getting congif file $configServer/$5"
+	curl -so /usr/local/updateTool/ApplicationUpdateControl.plist $configServer/$5
+	if [ ! -f /usr/local/updateTool/ApplicationUpdateControl.plist ]; then
 		echo "No config file available.  Exiting."
 		exit 1
 	fi
 else
-	logger "LLUpdate: ERROR Config file from server not specified.  Enter as param 4"
+	echo "LLUpdate: ERROR Config file from server not specified.  Enter as param 4"
 	echo "ERROR Config file from server not specified.  Enter as param 4. If running locally, type ./JssPolicy.sh x y z ConfigFileName.plist"
 	exit 1
 fi
@@ -232,18 +233,20 @@ fi
 rm $datafile
 touch $datafile
 
-policiesToCheck=$(defaults read /tmp/ApplicationUpdateControl.plist |awk -F= '/{/{print $1}'|grep -v "{"|sed 's/"//g')
+policiesToCheck=$(defaults read /usr/local/updateTool/ApplicationUpdateControl.plist |awk -F= '/{/{print $1}'|grep -v "{"|sed 's/"//g')
 while read -r line; do
-    dueDateApple=$(defaults read /tmp/ApplicationUpdateControl.plist "$line"|awk -F= '/DueDate/{print $2}'|sed 's/;//'|sed 's/"//g'| sed -e 's/^[[:space:]]*//')
+    dueDateApple=$(defaults read /usr/local/updateTool/ApplicationUpdateControl.plist "$line"|awk -F= '/DueDate/{print $2}'|sed 's/;//'|sed 's/"//g'| sed -e 's/^[[:space:]]*//')
     dueDate=$(date -j -f "%Y-%m-%d %H:%M:%S %z" "$dueDateApple" +"%m-%d-%Y %H:%M")
-    appPath=$(defaults read /tmp/ApplicationUpdateControl.plist "$line"|awk -F= '/Path/{print $2}' | sed 's/"//g'|sed 's/;//'|sed -e 's/^[[:space:]]*//')
-    packageName=$(defaults read /tmp/ApplicationUpdateControl.plist "$line"|awk '/PackageName/{print $3}' | sed 's/;//')
-    source=$(defaults read /tmp/ApplicationUpdateControl.plist "$line"|awk '/Source/{print $3}'|sed 's/;//')
-    latestVer=$(defaults read /tmp/ApplicationUpdateControl.plist "$line"|awk '/LatestVersion/{print $3}'|sed 's/;//'|sed 's/"//g')
-    minVers=$(defaults read /tmp/ApplicationUpdateControl.plist  "$line"|awk '/MinimumVersion/{print $3}'|sed 's/;//'|sed 's/"//g')
-    if [[ "$source" == http* ]]; then
-		update "$line" "$latestVer" "$installPolicy" "$dueDate" "$minVers" "$appPath" "$source"
+    appPath=$(defaults read /usr/local/updateTool/ApplicationUpdateControl.plist "$line"|awk -F= '/Path/{print $2}' | sed 's/"//g'|sed 's/;//'|sed -e 's/^[[:space:]]*//')
+    packageName=$(defaults read /usr/local/updateTool/ApplicationUpdateControl.plist "$line"|awk '/PackageName/{print $3}' | sed 's/;//')
+    source=$(defaults read /usr/local/updateTool/ApplicationUpdateControl.plist "$line"|awk '/Source/{print $3}'|sed 's/;//')
+    latestVer=$(defaults read /usr/local/updateTool/ApplicationUpdateControl.plist "$line"|awk '/LatestVersion/{print $3}'|sed 's/;//'|sed 's/"//g')
+    minVers=$(defaults read /usr/local/updateTool/ApplicationUpdateControl.plist  "$line"|awk '/MinimumVersion/{print $3}'|sed 's/;//'|sed 's/"//g')
+    if [[ $source == \"http* ]]; then
+	sha256=$(defaults read /usr/local/updateTool/ApplicationUpdateControl.plist "$line"|awk '/sha256/{print $2} | sed 's/"//g'|sed 's/;//'|sed -e 's/^[[:space:]]*//')
+	update "$line" "$latestVer" "$installPolicy" "$dueDate" "$minVers" "$appPath" "$source"
     fi
+
 done <<< "$policiesToCheck"
 
 # Check for Apple Software
@@ -253,7 +256,7 @@ checkAppleUpdates
 RUM="/usr/local/bin/RemoteUpdateManager"
 if [ ! -f "$RUM" ]; then
     echo "Adobe RUM is not installed on this computer"
-    logger "LLUpdate: Adobe RUM is not installed on this computer. Won't check for Adobe CC Updates."
+    echo "LLUpdate: Adobe RUM is not installed on this computer. Won't check for Adobe CC Updates."
 else
     checkforAdobeUpdates
     $RUM --action=download
