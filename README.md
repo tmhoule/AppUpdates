@@ -1,3 +1,5 @@
+#### IMPORTANT: New version of the AppUpdates tool is in a new repository. (https://github.com/tmhoule/AppUpdateTool).  This version is depreciated.
+
 #### NOTE: View the quickstart guide for a quick tutorial.  
 ##### (https://github.com/tmhoule/AppUpdates/blob/master/QUICKSTART.md)
 ___________________________
